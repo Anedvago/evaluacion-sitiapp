@@ -21,7 +21,7 @@ public class userModel {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "profile_id")
     private profileModel profile;
 

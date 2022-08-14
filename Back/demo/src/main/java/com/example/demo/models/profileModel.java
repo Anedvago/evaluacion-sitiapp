@@ -12,8 +12,8 @@ public class profileModel {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "profile")
-    private userModel user;
+    /* @OneToOne(mappedBy = "profile")
+    private userModel user; */
 
     public profileModel() {
     }
@@ -21,7 +21,7 @@ public class profileModel {
     public profileModel(long id, String name, userModel user) {
         this.id = id;
         this.name = name;
-        this.user = user;
+        //this.user = user;
     }
 
     public long getId() {
@@ -40,17 +40,17 @@ public class profileModel {
         this.name = name;
     }
 
-    public userModel getUser() {
+   /*  public userModel getUser() {
         return user;
-    }
+    } */
 
-    public void setUser(userModel user) {
+    /* public void setUser(userModel user) {
         this.user = user;
-    }
+    } */
 
     @Override
     public String toString() {
-        return "profileModel [id=" + id + ", name=" + name + ", user=" + user + "]";
+        return "profileModel [id=" + id + ", name=" + name + ", user=" + "]";
     }
 
 }

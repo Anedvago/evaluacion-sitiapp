@@ -17,15 +17,18 @@ public class productModel {
 	@Column(name="unit_value")
 	private long unitValue;
 
+    @Column(name="img")
+	private String img;
 
     public productModel() {
     }
 
-    public productModel(long id, String name, String state, long unitValue) {
+    public productModel(long id, String name, String state, long unitValue, String img) {
         this.id = id;
         this.name = name;
         this.state = state;
         this.unitValue = unitValue;
+        this.img = img;
     }
 
     public long getId() {
@@ -60,10 +63,20 @@ public class productModel {
         this.unitValue = unitValue;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     @Override
     public String toString() {
-        return "productModel [id=" + id + ", name=" + name + ", state=" + state + ", unitValue=" + unitValue + "]";
+        return "productModel [id=" + id + ", img=" + img + ", name=" + name + ", state=" + state + ", unitValue="
+                + unitValue + "]";
     }
+
 
     
 }
