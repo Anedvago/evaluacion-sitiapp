@@ -27,6 +27,10 @@ public class clientModel {
 	@Column(name="state")
 	private String state;
 
+
+    public clientModel() {
+    }
+
     public clientModel(long client, identificationTypeModel identificationType, String identification,
             String businessName, Date registrationDate, String state) {
         this.client = client;

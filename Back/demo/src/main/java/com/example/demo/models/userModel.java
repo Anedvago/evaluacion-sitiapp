@@ -25,6 +25,9 @@ public class userModel {
     @JoinColumn(name = "profile_id")
     private profileModel profile;
 
+    public userModel() {
+    }
+
     public userModel(long id, String name, String surname, String user, String password, profileModel profile) {
         this.id = id;
         this.name = name;

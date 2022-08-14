@@ -15,6 +15,9 @@ public class profileModel {
     @OneToOne(mappedBy = "profile")
     private userModel user;
 
+    public profileModel() {
+    }
+
     public profileModel(long id, String name, userModel user) {
         this.id = id;
         this.name = name;

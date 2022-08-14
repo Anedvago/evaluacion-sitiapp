@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class identificationTypeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long identification_type;
+    private long identificationType;
 
     @Column(name = "abbreviation")
     private String abbreviation;
@@ -14,18 +14,23 @@ public class identificationTypeModel {
     @Column(name = "description")
     private String description;
 
+    
+
+    public identificationTypeModel() {
+    }
+
     public identificationTypeModel(long identification_type, String abbreviation, String description) {
-        this.identification_type = identification_type;
+        this.identificationType = identification_type;
         this.abbreviation = abbreviation;
         this.description = description;
     }
 
-    public long getIdentification_type() {
-        return identification_type;
+    public long getIdentificationType() {
+        return identificationType;
     }
 
-    public void setIdentification_type(long identification_type) {
-        this.identification_type = identification_type;
+    public void setIdentificationType(long identification_type) {
+        this.identificationType = identification_type;
     }
 
     public String getAbbreviation() {
@@ -47,7 +52,7 @@ public class identificationTypeModel {
     @Override
     public String toString() {
         return "identificationTypesModel [abbreviation=" + abbreviation + ", description=" + description
-                + ", identification_type=" + identification_type + "]";
+                + ", identification_type=" + identificationType + "]";
     }
 
     

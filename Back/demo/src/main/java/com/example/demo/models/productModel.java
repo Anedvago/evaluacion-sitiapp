@@ -17,6 +17,10 @@ public class productModel {
 	@Column(name="unit_value")
 	private long unitValue;
 
+
+    public productModel() {
+    }
+
     public productModel(long id, String name, String state, long unitValue) {
         this.id = id;
         this.name = name;

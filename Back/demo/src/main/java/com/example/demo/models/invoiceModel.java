@@ -18,6 +18,11 @@ public class invoiceModel {
 	@Column(name = "date")
 	private Date date;
 
+    
+
+    public invoiceModel() {
+    }
+
     public invoiceModel(long consecutive, clientModel client, Date date) {
         this.consecutive = consecutive;
         this.client = client;

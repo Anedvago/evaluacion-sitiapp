@@ -23,6 +23,11 @@ public class detailInvoiceModel {
 	@Column(name = "unit_value")
 	private long unitValue;
 
+    
+
+    public detailInvoiceModel() {
+    }
+
     public detailInvoiceModel(long id, invoiceModel consecutive, productModel productId, long amount, long unitValue) {
         this.id = id;
         this.consecutive = consecutive;
