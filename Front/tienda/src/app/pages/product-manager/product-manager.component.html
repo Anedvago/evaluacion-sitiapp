@@ -97,8 +97,14 @@
             </div>
             <div class="mb-3" *ngIf="typeModal == 'update' && product != undefined">
                 <label for="exampleInputEmail1" class="form-label">imagen</label>
-                <div>
-                    <img src="{{ product.img }}" alt="100px" height="100px">
+                <div class="row">
+                    <div class="col">
+                        <img src="{{ product.img }}" alt="100px" height="100px">
+                    </div>
+                    <div class="col-8">
+                        <input type="file" class="form-control" (change)="uploadImg($event)">
+                    </div>
+                    
                 </div>
                 
             </div>

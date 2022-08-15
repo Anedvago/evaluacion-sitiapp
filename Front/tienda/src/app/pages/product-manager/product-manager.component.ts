@@ -49,6 +49,7 @@ export class ProductManagerComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       let img: string = reader.result?.toString()!;
+      this.img = ""
       this.img = img;
     };
     
@@ -73,6 +74,8 @@ export class ProductManagerComponent implements OnInit {
         this.products = data
         this.cleanForm();
       })
+    },(error)=>{
+      alert("El peso de la imagen excede la capacidad")
     });
   }
   updateProduct() {
@@ -82,6 +85,8 @@ export class ProductManagerComponent implements OnInit {
         this.products = data
         this.cleanForm();
       })
+    },(error)=>{
+      alert("El peso de la imagen excede la capacidad")
     });
   }
 
