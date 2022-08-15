@@ -1,0 +1,30 @@
+.card {
+    height: 40vh;
+    margin: 10px;
+}
+
+.cardTableProducts {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.botonera {
+    display: flex;
+}
+
+.btnForm {
+    margin-right: 10px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+tr:hover {
+    background-color: rgb(211, 211, 255);
+    cursor: pointer;
+}
+.modal{
+    width: 50vw;
+    height: 50vh;
+}

@@ -7,11 +7,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerManagerComponent } from './pages/customer-manager/customer-manager.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ProductManagerComponent } from './pages/product-manager/product-manager.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerManagerComponent
+    CustomerManagerComponent,
+    ProductManagerComponent
   ],
   imports: [
     BrowserModule,
