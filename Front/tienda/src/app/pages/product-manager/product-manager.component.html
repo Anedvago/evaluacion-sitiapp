@@ -55,7 +55,7 @@
                                            {{product.state}}
                                         </td>
                                         <td>
-                                            {{product.img}}
+                                            <img src="{{ product.img }}" alt="10px" height="70px">
                                         </td>
 
                                     </tr>
@@ -97,7 +97,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">imagen</label>
-                <input type="file" class="form-control" [(ngModel)]="img" name="img">
+                <input type="file" class="form-control">
             </div>
         </form>
     </div>

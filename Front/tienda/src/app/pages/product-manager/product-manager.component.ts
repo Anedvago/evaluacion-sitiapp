@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class ProductManagerComponent implements OnInit {
 
-  constructor(private productService: ProductService, private modalService: NgbModal) { }
+  constructor(private productService: ProductService, private modalService: NgbModal,private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.productService.listProducts().subscribe((data) => {
@@ -31,6 +32,8 @@ export class ProductManagerComponent implements OnInit {
   product: Product
 
   ref: number = 0
+
+/*   pimg = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${image}`); */
 
   cleanForm() {
     this.id = 0;

@@ -6,19 +6,19 @@ import javax.persistence.*;
 @Table(name = "product")
 public class productModel {
     @Id
-	private long id;
-	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name = "state")
-	private String state;
-	
-	@Column(name="unit_value")
-	private long unitValue;
+    private long id;
 
-    @Column(name="img")
-	private String img;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "unit_value")
+    private long unitValue;
+    @Lob
+    @Column(name = "img", length = 1000000000)
+    private String img;
 
     public productModel() {
     }
@@ -77,6 +77,4 @@ public class productModel {
                 + unitValue + "]";
     }
 
-
-    
 }
