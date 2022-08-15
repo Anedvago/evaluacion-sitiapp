@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,15 +29,11 @@ public class clientController {
         return clientService.listClients();
     }
 
-    @GetMapping(path = "/{identification}")
-    public clientModel findClientByIdentification(@PathVariable("identification") String identification) {
-        return clientService.findClientByIdentification(identification);
+    @GetMapping(path = "/{identification}/{type}")
+    public Optional<clientModel> findClientByIdentificationAndType(@PathVariable("identification") String identification,@PathVariable("type") Long type) {
+        return clientService.findClientByIdentificationAndType(type,identification);
     }
 
-    @GetMapping(path = "/query")
-    public ArrayList<clientModel> findClientBusinessName(@RequestParam("businessName") String businessName) {
-        return clientService.findClientByBusinessName(businessName);
-    }
 
     @PostMapping()
     public clientModel insertClient(@RequestBody clientModel client) {

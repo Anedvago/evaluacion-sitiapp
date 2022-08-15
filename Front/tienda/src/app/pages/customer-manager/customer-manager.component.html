@@ -6,45 +6,101 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            Buscar cliente por Identificacion
+            <div class="card cardTableClients">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Identificacion o Razon social">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            Modificar cliente
+                        <div class="col botonera">
+                            <button type="button" class="btn btn-primary btnForm">Filtrar por razon social</button>
+                            <button type="button" class="btn btn-primary btnForm">filtrar por identificacion</button>
+                            <button type="button" class="btn btn-primary btnForm">quitar filtros</button>
+                            <button type="button" class="btn btn-success btnForm" (click)="openModal(content)">Insertar
+                                cliente</button>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            Registrar un nuevo cliente
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Tipo ident.</th>
+                                        <th scope="col">Identificacion</th>
+                                        <th scope="col">Razon social</th>
+                                        <th scope="col">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let client of clients; index as i" (click)="openModal(content)"
+                                        (click)="selectCustomer(client['identification'],client['identificationType']['identificationType'])">
+                                        <th scope="row">{{ i + 1 }}</th>
+                                        <td>
+                                            {{client["identificationType"]["abbreviation"]}}
+                                        </td>
+                                        <td>
+                                            {{client["identification"]}}
+                                        </td>
+                                        <td>
+                                            {{client["businessName"]}}
+                                        </td>
+                                        <td>
+                                            {{client["state"]}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            eliminar un cliente
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 </div>
+
+<ng-template #content let-modal class="modal">
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Tipo de identificacion</label>
+                <div *ngIf="typeModal == 'create'">
+                    <select class="form-select" [(ngModel)]="idType" name="idType">
+                        <option [value]="-1">Escoja una opcion</option>
+                        <option *ngFor="let type of idTypes" value="{{type['identificationType']}}">
+                            {{type["description"]}}</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Identificacion</label>
+                <input type="text" class="form-control" [(ngModel)]="identification" name="identification">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Razon social</label>
+                <input type="text" class="form-control" [(ngModel)]="businessName" name="businessName">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Estado</label>
+                <select class="form-select" [(ngModel)]="state" name="state">
+                    <option value="active">Activo</option>
+                    <option value="inactive">Inactivo</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button *ngIf="typeModal == 'create'" type="button" class="btn btn-success"
+            (click)="insertClient()">Insertar</button>
+        <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success">Modificar</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

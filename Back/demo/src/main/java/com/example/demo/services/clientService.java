@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,12 +32,10 @@ public class clientService {
         }
     }
 
-    public clientModel findClientByIdentification(String identification) {
-        return clientRepository.findByIdentification(identification);
+
+    public Optional<clientModel> findClientByIdentificationAndType(Long type,String identification) {
+        return clientRepository.findByIdentificationAndType(type,identification);
     }
 
-    public ArrayList<clientModel> findClientByBusinessName(String businessName) {
-        return clientRepository.findByBusinessName(businessName);
-    }
 
 }
