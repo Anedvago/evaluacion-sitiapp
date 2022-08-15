@@ -29,20 +29,22 @@ export class CustomerManagerComponent implements OnInit {
 
   typeModal: string = "create"
 
-  idType = "-1"
+  idType = -1
   identification = ""
   businessName = ""
   state = "active"
+  id: number = -1
 
   cleanForm() {
-    this.idType = "-1"
+    this.idType = -1
     this.identification = ""
     this.businessName = ""
     this.state = "active"
   }
 
+
   insertClient() {
-    this.customerService.insertClient(parseInt(this.idType), this.identification, this.businessName, this.state).subscribe((data) => {
+    this.customerService.insertClient(this.idType, this.identification, this.businessName, this.state).subscribe((data) => {
       this.customerService.listClients().subscribe((data) => {
         this.clients = data;
         this.cleanForm();
@@ -50,7 +52,7 @@ export class CustomerManagerComponent implements OnInit {
     });
   }
   updateClient() {
-    this.customerService.insertClient(parseInt(this.idType), this.identification, this.businessName, this.state).subscribe((data) => {
+    this.customerService.insertClient(this.idType, this.identification, this.businessName, this.state).subscribe((data) => {
       this.customerService.listClients().subscribe((data) => {
         this.clients = data;
         this.cleanForm();
@@ -68,8 +70,18 @@ export class CustomerManagerComponent implements OnInit {
     
     this.customerService.findClientByIdentificationAndType(identification,type).subscribe((data)=>{
       console.log(data);
-      
+      this.setClient(data["client"],data["identificationType"]["identificationType"],data["identification"],data["businessName"],data["state"]);
     })
+  }
+  setClient(client:number,idType: number,
+    identification: string,
+    businessName: string,
+    state: string) {
+      this.id = client
+    this.idType = idType
+    this.identification = identification
+    this.businessName = businessName
+    this.state = state
   }
 
 }

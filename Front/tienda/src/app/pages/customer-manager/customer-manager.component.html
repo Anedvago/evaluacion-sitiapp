@@ -73,8 +73,8 @@
                 <label for="exampleInputEmail1" class="form-label">Tipo de identificacion</label>
                 <div *ngIf="typeModal == 'create'">
                     <select class="form-select" [(ngModel)]="idType" name="idType">
-                        <option [value]="-1">Escoja una opcion</option>
-                        <option *ngFor="let type of idTypes" value="{{type['identificationType']}}">
+                        <option [value]=-1>Escoja una opcion</option>
+                        <option *ngFor="let type of idTypes" value="{{(type['identificationType'])}}">
                             {{type["description"]}}</option>
                     </select>
                 </div>
