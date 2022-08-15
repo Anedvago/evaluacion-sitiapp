@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Client } from 'src/app/models/client';
+import { IdentificationType } from 'src/app/models/identificationType';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 import { IdTypesService } from 'src/app/services/idTypes/id-types.service';
 
@@ -14,18 +16,15 @@ export class CustomerManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerService.listClients().subscribe((data) => {
-
       this.clients = data;
-
     })
     this.idTypesService.listIdTypes().subscribe((data) => {
-
       this.idTypes = data
     })
   }
 
-  clients: any[] = []
-  idTypes: any[] = []
+  clients: Client[] = []
+  idTypes: IdentificationType[] = []
 
   typeModal: string = "create"
 
@@ -37,6 +36,8 @@ export class CustomerManagerComponent implements OnInit {
 
   identificationFind = ""
   typeFind = -1
+
+  client:Client
 
   cleanForm() {
     this.idType = -1
@@ -85,18 +86,17 @@ export class CustomerManagerComponent implements OnInit {
 
   selectCustomer(identification: string, type: number) {
     this.customerService.findClientByIdentificationAndType(identification, type).subscribe((data) => {
-      this.setClient(data["client"], data["identificationType"]["identificationType"], data["identification"], data["businessName"], data["state"]);
+      this.client = data;
+      this.setClient(this.client);
     })
   }
-  setClient(client: number, idType: number,
-    identification: string,
-    businessName: string,
-    state: string) {
-    this.id = client
-    this.idType = idType
-    this.identification = identification
-    this.businessName = businessName
-    this.state = state
+
+  setClient(client:Client) {
+    this.id = client.client
+    this.idType = client.identificationType.identificationType
+    this.identification = client.identification
+    this.businessName = client.businessName
+    this.state = client.state
   }
 
   setTypeModal(typeModal: string) {
