@@ -13,11 +13,20 @@
                             <input type="email" class="form-control" id="exampleFormControlInput1"
                                 placeholder="Identificacion o Razon social">
                         </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-select" [(ngModel)]="idType" name="idType">
+                                    <option [value]=-1>Escoja una opcion</option>
+                                    <option *ngFor="let type of idTypes" value="{{(type['identificationType'])}}">
+                                        {{type["description"]}}</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col botonera">
-                            <button type="button" class="btn btn-primary btnForm">Filtrar por razon social</button>
                             <button type="button" class="btn btn-primary btnForm">filtrar por identificacion</button>
                             <button type="button" class="btn btn-primary btnForm">quitar filtros</button>
-                            <button type="button" class="btn btn-success btnForm" (click)="openModal(content)">Insertar
+                            <button type="button" class="btn btn-success btnForm" (click)="openModal(content)"
+                                (click)="setTypeModal('create')">Insertar
                                 cliente</button>
                         </div>
 
@@ -36,7 +45,8 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let client of clients; index as i" (click)="openModal(content)"
-                                        (click)="selectCustomer(client['identification'],client['identificationType']['identificationType'])">
+                                        (click)="selectCustomer(client['identification'],client['identificationType']['identificationType'])"
+                                        (click)="setTypeModal('update')">
                                         <th scope="row">{{ i + 1 }}</th>
                                         <td>
                                             {{client["identificationType"]["abbreviation"]}}
@@ -47,8 +57,11 @@
                                         <td>
                                             {{client["businessName"]}}
                                         </td>
-                                        <td>
-                                            {{client["state"]}}
+                                        <td *ngIf="client['state']== 'active'">
+                                            Activo
+                                        </td>
+                                        <td *ngIf="client['state']== 'inactive'">
+                                            Inactivo
                                         </td>
 
                                     </tr>
@@ -78,6 +91,12 @@
                             {{type["description"]}}</option>
                     </select>
                 </div>
+                <div *ngIf="typeModal == 'update'">
+                    <select class="form-select" [(ngModel)]="idType" name="idType">
+                        <option *ngFor="let type of idTypes" value="{{(type['identificationType'])}}">
+                            {{type["description"]}}</option>
+                    </select>
+                </div>
 
             </div>
             <div class="mb-3">
@@ -98,9 +117,10 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button *ngIf="typeModal == 'create'" type="button" class="btn btn-success"
-            (click)="insertClient()">Insertar</button>
-        <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success">Modificar</button>
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button *ngIf="typeModal == 'create'" type="button" class="btn btn-success" (click)="insertClient()"
+            (click)="modal.close('Close click')">Insertar</button>
+        <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success" (click)="updateClient()"
+            (click)="modal.close('Close click')">Modificar</button>
+        <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Cancelar</button>
     </div>
 </ng-template>

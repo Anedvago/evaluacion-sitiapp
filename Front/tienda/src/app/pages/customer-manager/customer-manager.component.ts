@@ -52,7 +52,7 @@ export class CustomerManagerComponent implements OnInit {
     });
   }
   updateClient() {
-    this.customerService.insertClient(this.idType, this.identification, this.businessName, this.state).subscribe((data) => {
+    this.customerService.updateClient(this.id,this.idType, this.identification, this.businessName, this.state).subscribe((data) => {
       this.customerService.listClients().subscribe((data) => {
         this.clients = data;
         this.cleanForm();
@@ -65,23 +65,29 @@ export class CustomerManagerComponent implements OnInit {
   }
 
 
-  selectCustomer(identification:string,type:number){
-    console.log(identification +" "+ type);
-    
-    this.customerService.findClientByIdentificationAndType(identification,type).subscribe((data)=>{
+  selectCustomer(identification: string, type: number) {
+
+    this.customerService.findClientByIdentificationAndType(identification, type).subscribe((data) => {
       console.log(data);
-      this.setClient(data["client"],data["identificationType"]["identificationType"],data["identification"],data["businessName"],data["state"]);
+      this.setClient(data["client"], data["identificationType"]["identificationType"], data["identification"], data["businessName"], data["state"]);
     })
   }
-  setClient(client:number,idType: number,
+  setClient(client: number, idType: number,
     identification: string,
     businessName: string,
     state: string) {
-      this.id = client
+    this.id = client
     this.idType = idType
     this.identification = identification
     this.businessName = businessName
     this.state = state
+  }
+
+  setTypeModal(typeModal: string) {
+    this.typeModal = typeModal;
+    if (typeModal == "create") {
+      this.cleanForm();
+    }
   }
 
 }
