@@ -16,14 +16,14 @@ export class CustomerService {
     return jsonRecibido;
   }
 
-  
-  findClientByIdentificationAndType(identification:string,type:number) {
+
+  findClientByIdentificationAndType(identification: string, type: number) {
     let jsonRecibido: Observable<any> =
-      this.clientHttp.get<any>(this.url + '/'+identification+"/"+type, {});
+      this.clientHttp.get<any>(this.url + '/' + identification + "/" + type, {});
     return jsonRecibido;
   }
 
-  formatDate(date:Date){
+  formatDate(date: Date) {
     let month = date.getMonth() + 1
     let monthText = month.toString().length == 1 ? "0" + month.toString() : month.toString()
     let day = date.getDate();
@@ -51,7 +51,7 @@ export class CustomerService {
     return jsonRecibido;
   }
 
-  updateClient(client:number,idType: number,
+  updateClient(client: number, idType: number,
     identification: string,
     businessName: string,
     state: string) {
@@ -60,23 +60,22 @@ export class CustomerService {
     let jsonRecibido: Observable<any> =
       this.clientHttp.post<any>(this.url + '',
         {
-          "client":client,
+          "client": client,
           "identificationType": { "identificationType": idType },
           "identification": identification,
           "businessName": businessName,
-          "registrationDate": dateText,
           "state": state
 
         });
     return jsonRecibido;
   }
-}
 
-/* {
-  "client": 2,
-    "identificationType" : { "identificationType": 1 },
-  "identification" : "9518740236",
-    "businessName": "Multi Juegos",
-      "registrationDate": "2022-08-09",
-        "state": "active"
-} */
+  deleteClient(id: number) {
+    
+      let jsonRecibido: Observable<any> =
+        this.clientHttp.delete<any>(this.url + '/' + id, {});
+      return jsonRecibido
+
+
+  }
+}
