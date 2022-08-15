@@ -33,7 +33,27 @@ export class ProductManagerComponent implements OnInit {
 
   ref: number = 0
 
-/*   pimg = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${image}`); */
+ /*  getBase64(file: File) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  } */
+
+
+  uploadImg(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      let img: string = reader.result?.toString()!;
+      this.img = img;
+    };
+    
+  }
+
 
   cleanForm() {
     this.id = 0;

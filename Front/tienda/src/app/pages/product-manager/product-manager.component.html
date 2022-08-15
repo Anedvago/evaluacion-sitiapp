@@ -95,9 +95,16 @@
                     <option value="Agotado">Agotado</option>
                 </select>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" *ngIf="typeModal == 'update' && product != undefined">
                 <label for="exampleInputEmail1" class="form-label">imagen</label>
-                <input type="file" class="form-control">
+                <div>
+                    <img src="{{ product.img }}" alt="100px" height="100px">
+                </div>
+                
+            </div>
+            <div class="mb-3" *ngIf="typeModal == 'create'">
+                <label for="exampleInputEmail1" class="form-label">imagen</label>
+                <input type="file" class="form-control" (change)="uploadImg($event)">
             </div>
         </form>
     </div>
