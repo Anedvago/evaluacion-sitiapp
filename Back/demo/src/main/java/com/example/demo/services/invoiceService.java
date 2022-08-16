@@ -31,7 +31,7 @@ public class invoiceService {
         }
     }
 
-    public Optional<invoiceModel> findProductByConsecutive(Long id) {
+    public Optional<invoiceModel> findInvoiceByConsecutive(Long id) {
         return invoiceRepository.findById(id);
     }
 }

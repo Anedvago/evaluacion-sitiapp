@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from 'src/app/models/client';
 import { IdentificationType } from 'src/app/models/identificationType';
+import { Invoice } from 'src/app/models/invoice';
 import { Product } from 'src/app/models/product';
 import { CustomerService } from 'src/app/services/customer/customer.service';
+import { DetailInvoiceService } from 'src/app/services/detail-invoice/detail-invoice.service';
 import { IdTypesService } from 'src/app/services/idTypes/id-types.service';
 import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -15,7 +17,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class InvoicingComponent implements OnInit {
 
-  constructor(private invoiceService:InvoiceService,private productService: ProductService, private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
+  constructor(private detaiInvoiceService: DetailInvoiceService, private invoiceService: InvoiceService, private productService: ProductService, private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.idTypesService.listIdTypes().subscribe((data) => {
@@ -34,6 +36,8 @@ export class InvoicingComponent implements OnInit {
   amount: number = 0;
   index: number = 0;
   subTotal: number = 0;
+
+  invoice: Invoice
 
   findCustomer() {
     this.customerService.findClientByIdentificationAndType(this.identificationFind, this.typeFind).subscribe((data) => {
@@ -79,10 +83,17 @@ export class InvoicingComponent implements OnInit {
     this.typeFind = -1
   }
 
-  insertInvoice(){
-    this.invoiceService.insertInvoice(this.client).subscribe((data)=>{
+  insertInvoice() {
+    this.invoiceService.insertInvoice(this.client).subscribe((data) => {
       console.log(data);
-      
+      this.invoice = data;
+      for (let i = 0; i < this.productList.length; i++) {
+        this.detaiInvoiceService.insertDetailInvoice(this.invoice.consecutive, this.productList[i].id, this.amounts[i], this.productList[i].unitValue).subscribe((data)=>{
+          console.log(data);
+          
+        })
+      }
+
     })
   }
 }

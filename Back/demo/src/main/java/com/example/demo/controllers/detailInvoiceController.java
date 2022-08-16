@@ -14,35 +14,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.models.invoiceModel;
-import com.example.demo.services.invoiceService;
+import com.example.demo.models.detailInvoiceModel;
+import com.example.demo.services.detailInvoiceService;
 
 @RestController
-@RequestMapping("/invoices")
+@RequestMapping("/detail-invoices")
 @CrossOrigin("http://localhost:4200")
-public class invoiceController {
+public class detailInvoiceController {
     @Autowired
-    invoiceService invoiceService;
+    detailInvoiceService detailInvoiceService;
 
     @GetMapping()
-    public ArrayList<invoiceModel> listInvoices() {
-        return invoiceService.listInvoices();
+    public ArrayList<detailInvoiceModel> listDetailInvoices() {
+        return detailInvoiceService.listDetailInvoices();
     }
 
-    @GetMapping(path = "/{consecutive}")
-    public Optional<invoiceModel> findInvoiceByConsecutive(@PathVariable("consecutive") Long consecutive) {
-        return invoiceService.findInvoiceByConsecutive(consecutive);
+    @GetMapping(path = "/{id}")
+    public Optional<detailInvoiceModel> findDetailInvoiceById(@PathVariable("id") Long id) {
+        return detailInvoiceService.findInvoiceById(id);
     }
 
 
     @PostMapping()
-    public invoiceModel insertInvoice(@RequestBody invoiceModel invoice) {
-        return invoiceService.insertInvoice(invoice);
+    public detailInvoiceModel insertDetailInvoice(@RequestBody detailInvoiceModel detailInvoice) {
+        return detailInvoiceService.insertDetailInvoice(detailInvoice);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> deleteInvoice(@PathVariable("id") long id) {
-        boolean eliminated = invoiceService.deleteInvoice(id);
+    public ResponseEntity<?> deletedetailInvoice(@PathVariable("id") long id) {
+        boolean eliminated = detailInvoiceService.deleteDetailInvoice(id);
         if(eliminated){
             return ResponseEntity.ok().build();
         }else{
