@@ -1,0 +1,12 @@
+.card {
+    height: 80vh;
+    margin: 10px;
+}
+.table {
+    margin-top: 20px;
+}
+
+tr:hover {
+    background-color: rgb(211, 211, 255);
+    cursor: pointer;
+}

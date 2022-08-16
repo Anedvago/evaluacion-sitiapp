@@ -1,0 +1,115 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>
+                Facturacion de venta
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="row">
+                    <div class="col-4">
+                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Identificacion" [(ngModel)]="identificationFind" name="identificationFind">
+                    </div>
+                    <div class="col-3">
+                        <div>
+                            <select class="form-select" [(ngModel)]="typeFind" name="typeFind">
+                                <option [value]=-1>Escoja una opcion</option>
+                                <option *ngFor="let type of idTypes" value="{{(type['identificationType'])}}">
+                                    {{type.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col botonera">
+                        <button type="button" class="btn btn-primary btnForm" (click)="findCustomer()">filtrar por
+                            identificacion</button>
+                    </div>
+
+                </div>
+                <div class="row" *ngIf="client != undefined">
+                    <div class="col">
+                        <p>{{client.identification}}</p>
+                    </div>
+                    <div class="col">
+                        <p>{{client.businessName}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Ref producto</label>
+                            <input type="text" class="form-control" [(ngModel)]="ref" name="ref">
+                        </div>
+                    </div>
+                    <div class="col botonera"> <button type="button" class="btn btn-primary btnForm"
+                            (click)="findProduct()" (click)="openModal(content)" (click)="setIndex(amounts.length)">Buscar</button></div>
+                </div>
+                <div class="row" *ngIf="product != undefined">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Ref</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Valor unitario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of productList; index as i" (click)="openModal(content)"(click)="setIndex(i)">
+                                            <th scope="row">{{ i + 1 }}</th>
+                                            <td>
+                                                {{product.id}}
+                                            </td>
+                                            <td>
+                                                {{product.name}}
+                                            </td>
+                                            <td>
+                                                {{amounts[i]}}
+                                            </td>
+                                            <td>
+                                                {{product.unitValue}}
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #content let-modal class="modal">
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Cantidad</label>
+                <input type="number" class="form-control" [(ngModel)]="amount" name="amount">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <!-- <button *ngIf="typeModal == 'create'" type="button" class="btn btn-success" (click)="insertProduct()"
+            (click)="modal.close('Close click')">Insertar</button>
+        <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success" (click)="updateProduct()"
+            (click)="modal.close('Close click')">Modificar</button> -->
+        <button type="button" class="btn btn-success" (click)="setAmount()"
+            (click)="modal.close('Close click')">Fijar cantidad</button>
+        <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Cancelar</button>
+    </div>
+</ng-template>
