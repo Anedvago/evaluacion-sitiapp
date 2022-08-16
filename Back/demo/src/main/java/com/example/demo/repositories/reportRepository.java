@@ -15,7 +15,7 @@ public interface reportRepository extends CrudRepository<invoiceModel,Long> {
     "p.name, case when sum(p.unit_value*di.amount) is null then 0 "+
     "when sum(p.unit_value*di.amount) is not null then sum(p.unit_value*di.amount) "+
     "end as total from product p left join detail_invoice di on di.product_id = p.id "+
-    "left join invoice i on di.consecutive = i.consecutive group by i.date, p.id "+
+    "left join invoice i on di.consecutive = i.consecutive group by month(i.date), year(i.date), p.id "+
     "order by i.date, p.id")
 	ArrayList<?> obtainReportOne();
 }
