@@ -63,6 +63,10 @@ export class InvoicingComponent implements OnInit {
     }
     this.subTotal = sum;
   }
+  removeProduct(index:number){
+    this.productList.splice(index,1);
+    this.amounts.splice(index,1);
+  }
 
   /* removeClientChecked(){
     this.customerService.listClients().subscribe((data) => {

@@ -59,6 +59,7 @@
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Cantidad</th>
                                             <th scope="col">Valor unitario</th>
+                                            <th scope="col">Quitar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -76,13 +77,16 @@
                                             <td>
                                                 {{product.unitValue}}
                                             </td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning" (click)="removeProduct(i)" >Quitar</button>
+                                            </td>
                                             
 
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <th>
                                                 Sub total
-                                            </td>
+                                            </th>
                                             <td>
                                                
                                             </td>
@@ -93,8 +97,11 @@
                                                
                                             </td>
                                             <td>
+                                               
+                                            </td>
+                                            <th>
                                                 {{subTotal}}
-                                            </td>
+                                            </th>
                                         </tr>
                                     </tbody>
                                 </table>
