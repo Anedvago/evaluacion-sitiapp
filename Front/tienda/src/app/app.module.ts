@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductManagerComponent } from './pages/product-manager/product-manager.component';
 import { UserManagerComponent } from './pages/user-manager/user-manager.component';
 import { InvoicingComponent } from './pages/invoicing/invoicing.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InvoicingComponent } from './pages/invoicing/invoicing.component';
     CustomerManagerComponent,
     ProductManagerComponent,
     UserManagerComponent,
-    InvoicingComponent
+    InvoicingComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

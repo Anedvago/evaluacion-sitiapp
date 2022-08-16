@@ -85,15 +85,11 @@ export class InvoicingComponent implements OnInit {
 
   insertInvoice() {
     this.invoiceService.insertInvoice(this.client).subscribe((data) => {
-      console.log(data);
       this.invoice = data;
       for (let i = 0; i < this.productList.length; i++) {
-        this.detaiInvoiceService.insertDetailInvoice(this.invoice.consecutive, this.productList[i].id, this.amounts[i], this.productList[i].unitValue).subscribe((data)=>{
-          console.log(data);
-          
+        this.detaiInvoiceService.insertDetailInvoice(this.invoice.consecutive, this.productList[i].id, this.amounts[i], this.productList[i].unitValue).subscribe((data) => {
         })
       }
-
     })
   }
 }
