@@ -8,12 +8,14 @@ import { CustomerManagerComponent } from './pages/customer-manager/customer-mana
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductManagerComponent } from './pages/product-manager/product-manager.component';
+import { UserManagerComponent } from './pages/user-manager/user-manager.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerManagerComponent,
-    ProductManagerComponent
+    ProductManagerComponent,
+    UserManagerComponent
   ],
   imports: [
     BrowserModule,
