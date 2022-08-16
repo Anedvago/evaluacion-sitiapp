@@ -5,6 +5,7 @@ import { IdentificationType } from 'src/app/models/identificationType';
 import { Product } from 'src/app/models/product';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 import { IdTypesService } from 'src/app/services/idTypes/id-types.service';
+import { InvoiceService } from 'src/app/services/invoice/invoice.service';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class InvoicingComponent implements OnInit {
 
-  constructor(private productService: ProductService, private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
+  constructor(private invoiceService:InvoiceService,private productService: ProductService, private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.idTypesService.listIdTypes().subscribe((data) => {
@@ -63,15 +64,11 @@ export class InvoicingComponent implements OnInit {
     }
     this.subTotal = sum;
   }
-  removeProduct(index:number){
-    this.productList.splice(index,1);
-    this.amounts.splice(index,1);
+  removeProduct(index: number) {
+    this.productList.splice(index, 1);
+    this.amounts.splice(index, 1);
+    this.setSubtotal()
   }
-
-  /* removeClientChecked(){
-    this.customerService.listClients().subscribe((data) => {
-     
-    }) */
 
   openModal(content: any) {
     this.modalService.open(content, { centered: true, size: 'lg' });
@@ -80,5 +77,12 @@ export class InvoicingComponent implements OnInit {
   cleanFormSearch() {
     this.identificationFind = ""
     this.typeFind = -1
+  }
+
+  insertInvoice(){
+    this.invoiceService.insertInvoice(this.client).subscribe((data)=>{
+      console.log(data);
+      
+    })
   }
 }

@@ -45,11 +45,12 @@
                         </div>
                     </div>
                     <div class="col botonera"> <button type="button" class="btn btn-primary btnForm"
-                            (click)="findProduct()" (click)="openModal(content)" (click)="setIndex(amounts.length)">Buscar</button></div>
+                            (click)="findProduct()" (click)="openModal(content)"
+                            (click)="setIndex(amounts.length)">Buscar</button></div>
                 </div>
                 <div class="row" *ngIf="product != undefined">
                     <div class="col">
-                        <div class="row">
+                        <div class="row tableContainer">
                             <div class="col">
                                 <table class="table table-striped">
                                     <thead>
@@ -59,11 +60,13 @@
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Cantidad</th>
                                             <th scope="col">Valor unitario</th>
+                                            <th scope="col">Sub Total</th>
                                             <th scope="col">Quitar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let product of productList; index as i" (click)="openModal(content)"(click)="setIndex(i)">
+                                        <tr *ngFor="let product of productList; index as i" (click)="openModal(content)"
+                                            (click)="setIndex(i)">
                                             <th scope="row">{{ i + 1 }}</th>
                                             <td>
                                                 {{product.id}}
@@ -78,26 +81,30 @@
                                                 {{product.unitValue}}
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" (click)="removeProduct(i)" >Quitar</button>
+                                                {{product.unitValue * amounts[i]}}
                                             </td>
-                                            
+                                            <td>
+                                                <button type="button" class="btn btn-warning"
+                                                    (click)="removeProduct(i)">Quitar</button>
+                                            </td>
+
 
                                         </tr>
                                         <tr>
                                             <th>
-                                                Sub total
+                                                Total
                                             </th>
                                             <td>
-                                               
+
                                             </td>
                                             <td>
-                                               
+
                                             </td>
                                             <td>
-                                               
+
                                             </td>
                                             <td>
-                                               
+
                                             </td>
                                             <th>
                                                 {{subTotal}}
@@ -107,7 +114,11 @@
                                 </table>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-success" (click)="insertInvoice()" >Guardar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,8 +144,8 @@
             (click)="modal.close('Close click')">Insertar</button>
         <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success" (click)="updateProduct()"
             (click)="modal.close('Close click')">Modificar</button> -->
-        <button type="button" class="btn btn-success" (click)="setAmount()"
-            (click)="modal.close('Close click')">Fijar cantidad</button>
+        <button type="button" class="btn btn-success" (click)="setAmount()" (click)="modal.close('Close click')">Fijar
+            cantidad</button>
         <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Cancelar</button>
     </div>
 </ng-template>
