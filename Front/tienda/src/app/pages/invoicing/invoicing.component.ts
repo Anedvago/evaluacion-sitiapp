@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class InvoicingComponent implements OnInit {
 
-  constructor(private productService: ProductService,private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
+  constructor(private productService: ProductService, private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.idTypesService.listIdTypes().subscribe((data) => {
@@ -22,17 +22,18 @@ export class InvoicingComponent implements OnInit {
     })
   }
   client: Client
-  idTypes:IdentificationType[] = []
-  identificationFind:string =""
-  typeFind:number = -1
+  idTypes: IdentificationType[] = []
+  identificationFind: string = ""
+  typeFind: number = -1
 
-  product:Product
+  product: Product
   ref: number = 0
-  productList:Product[]=[]
-  amounts:number[]=[]
-  amount:number = 0;
-  index:number = 0;
-  
+  productList: Product[] = []
+  amounts: number[] = []
+  amount: number = 0;
+  index: number = 0;
+  subTotal: number = 0;
+
   findCustomer() {
     this.customerService.findClientByIdentificationAndType(this.identificationFind, this.typeFind).subscribe((data) => {
       this.client = data
@@ -47,12 +48,20 @@ export class InvoicingComponent implements OnInit {
       this.amounts.push(0)
     })
   }
-  setAmount(){
+  setAmount() {
     this.amounts[this.index] = this.amount
+    this.setSubtotal()
     this.amount = 0
   }
-  setIndex(index:number){
+  setIndex(index: number) {
     this.index = index;
+  }
+  setSubtotal() {
+    let sum = 0;
+    for (let i = 0; i < this.productList.length; i++) {
+      sum += this.productList[i].unitValue * this.amounts[i]
+    }
+    this.subTotal = sum;
   }
 
   /* removeClientChecked(){
