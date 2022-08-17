@@ -7,33 +7,36 @@ import { ProductService } from 'src/app/services/product/product.service';
 @Component({
   selector: 'app-product-manager',
   templateUrl: './product-manager.component.html',
-  styleUrls: ['./product-manager.component.css']
+  styleUrls: ['./product-manager.component.css'],
 })
 export class ProductManagerComponent implements OnInit {
-
-  constructor(private productService: ProductService, private modalService: NgbModal,private sanitizer: DomSanitizer) { }
+  constructor(
+    private productService: ProductService,
+    private modalService: NgbModal,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.productService.listProducts().subscribe((data) => {
-      this.products = data
-    })
+      this.products = data;
+    });
   }
 
-  products: Product[] = []
+  products: Product[] = [];
 
-  typeModal: string = "create"
+  typeModal: string = 'create';
 
   id: number = 0;
-  name: string = "";
-  state: string = "";
+  name: string = '';
+  state: string = '';
   unitValue: number = 0;
-  img: string = ""
+  img: string = '';
 
-  product: Product
+  product: Product;
 
-  ref: number = 0
+  ref: number = 0;
 
- /*  getBase64(file: File) {
+  /*  getBase64(file: File) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -42,52 +45,67 @@ export class ProductManagerComponent implements OnInit {
     });
   } */
 
-
   uploadImg(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       let img: string = reader.result?.toString()!;
-      this.img = ""
+      this.img = '';
       this.img = img;
     };
-    
   }
-
 
   cleanForm() {
     this.id = 0;
-    this.name = "";
-    this.state = "";
+    this.name = '';
+    this.state = '';
     this.unitValue = 0;
-    this.img = ""
+    this.img = '';
   }
   cleanFormSearch() {
-    this.ref = 0
+    this.ref = 0;
   }
 
   insertProduct() {
-    let product: Product = new Product(this.id, this.name, this.state, this.unitValue, this.img);
-    this.productService.insertProduct(product).subscribe((data) => {
-      this.productService.listProducts().subscribe((data) => {
-        this.products = data
-        this.cleanForm();
-      })
-    },(error)=>{
-      alert("El peso de la imagen excede la capacidad")
-    });
+    let product: Product = new Product(
+      this.id,
+      this.name,
+      this.state,
+      this.unitValue,
+      this.img
+    );
+    this.productService.insertProduct(product).subscribe(
+      (data) => {
+        this.productService.listProducts().subscribe((data) => {
+          this.products = data;
+          this.cleanForm();
+        });
+      },
+      (error) => {
+        alert('El peso de la imagen excede la capacidad');
+      }
+    );
   }
   updateProduct() {
-    let product: Product = new Product(this.id, this.name, this.state, this.unitValue, this.img);
-    this.productService.updateProduct(product).subscribe((data) => {
-      this.productService.listProducts().subscribe((data) => {
-        this.products = data
-        this.cleanForm();
-      })
-    },(error)=>{
-      alert("El peso de la imagen excede la capacidad")
-    });
+    let product: Product = new Product(
+      this.id,
+      this.name,
+      this.state,
+      this.unitValue,
+      this.img
+    );
+    this.productService.updateProduct(product).subscribe(
+      (data) => {
+        this.productService.listProducts().subscribe((data) => {
+          this.products = data;
+          this.cleanForm();
+        });
+      },
+      (error) => {
+        alert('El peso de la imagen excede la capacidad');
+      }
+    );
   }
 
   openModal(content: any) {
@@ -96,34 +114,34 @@ export class ProductManagerComponent implements OnInit {
 
   findProduct() {
     this.productService.findProductByRef(this.ref).subscribe((data) => {
-      this.products = [data]
-    })
+      this.products = [data];
+    });
   }
   deleteFilters() {
     this.productService.listProducts().subscribe((data) => {
-      this.products = data
+      this.products = data;
       this.cleanFormSearch();
-    })
+    });
   }
 
   selectProduct(ref: number) {
     this.productService.findProductByRef(ref).subscribe((data) => {
       this.product = data;
       this.setProduct(this.product);
-    })
+    });
   }
 
   setProduct(product: Product) {
-    this.id = product.id
-    this.name = product.name
-    this.state = product.state
-    this.unitValue = product.unitValue
-    this.img = product.img
+    this.id = product.id;
+    this.name = product.name;
+    this.state = product.state;
+    this.unitValue = product.unitValue;
+    this.img = product.img;
   }
 
   setTypeModal(typeModal: string) {
     this.typeModal = typeModal;
-    if (typeModal == "create") {
+    if (typeModal == 'create') {
       this.cleanForm();
     }
   }
@@ -131,11 +149,9 @@ export class ProductManagerComponent implements OnInit {
   deleteProduct() {
     this.productService.deleteProduct(this.id).subscribe(() => {
       this.productService.listProducts().subscribe((data) => {
-        this.products = data
+        this.products = data;
         this.cleanForm();
-      })
+      });
     });
   }
-
-
 }

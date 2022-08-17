@@ -1,19 +1,23 @@
-.containerCard{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    
+.containerCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.card{
-    height: 40vh;
-    width: 30vw;
-    align-items: center;
-    background-color: antiquewhite;
+.card {
+  height: 40vh;
+  width: 30vw;
+  align-items: center;
+  background-color: white;
 }
-form{
-    width: 100%;
+form {
+  width: 100%;
 }
-.btn{
-    width: 100%;
+.btn {
+  width: 100%;
+}
+
+.container-fluid {
+  background-image: url("../../../assets/images/fondo1.jpg");
+  background-size: cover;
 }

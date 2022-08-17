@@ -1,32 +1,73 @@
 <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Mi empresa</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" (click)="navigate('main')">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" (click)="navigate('invoicing')">Facturacion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" (click)="navigate('customer-manager')">Clientes</a>
-                </li>
-                <li class="nav-item" *ngIf="profile == 'Administrador'">
-                    <a class="nav-link active" aria-current="page" (click)="navigate('product-manager')">Productos</a>
-                </li>
-                <li class="nav-item" *ngIf="profile == 'Administrador'">
-                    <a class="nav-link active" aria-current="page" (click)="navigate('reports')">Reportes</a>
-                </li>
-                <li class="nav-item" *ngIf="profile == 'Administrador'">
-                    <a class="nav-link active" aria-current="page" (click)="navigate('user-manager')">Usuarios</a>
-                </li>
-            </ul>
-
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Mi empresa</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="navigate('main')"
+            >Inicio</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="navigate('invoicing')"
+            >Facturacion</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="navigate('customer-manager')"
+            >Clientes</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="profile == 'Administrador'">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="navigate('product-manager')"
+            >Productos</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="profile == 'Administrador'">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="navigate('reports')"
+            >Reportes</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="profile == 'Administrador'">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            (click)="navigate('user-manager')"
+            >Usuarios</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" (click)="navigate('')"
+            >Cerrar Sesion</a
+          >
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>

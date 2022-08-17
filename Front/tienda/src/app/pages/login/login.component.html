@@ -1,24 +1,42 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col containerCard">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <form >
-                            <div class="mb-3">
-                              <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
-                              <input type="email" class="form-control" id="exampleInputEmail1"[(ngModel)]="username" name="username" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name="password">
-                            </div>
-                            <button type="submit" class="btn btn-success"(click)="login()">Ingresar</button>
-                          </form>
-                    </div>
-                    
-                </div>
+  <div class="row">
+    <div class="col containerCard">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Nombre de usuario</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  [(ngModel)]="username"
+                  name="username"
+                  aria-describedby="emailHelp"
+                />
               </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                  >Contraseña</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  [(ngModel)]="password"
+                  name="password"
+                />
+              </div>
+              <button type="submit" class="btn btn-success" (click)="login()">
+                Ingresar
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

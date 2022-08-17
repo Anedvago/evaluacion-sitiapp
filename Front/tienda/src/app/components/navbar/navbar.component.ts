@@ -4,20 +4,21 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.profile = localStorage.getItem("profile")!;
+    this.profile = localStorage.getItem('profile')!;
   }
 
-  navigate(route:string){
-    this.router.navigate(["/"+route]);
+  navigate(route: string) {
+    if (route == '') {
+      localStorage.removeItem('profile');
+    }
+    this.router.navigate(['/' + route]);
   }
 
-  profile:string = ""
-
+  profile: string = '';
 }
