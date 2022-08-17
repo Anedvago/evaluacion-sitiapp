@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <h3>Facturacion de venta</h3>
+      <h4>Facturacion de venta</h4>
     </div>
   </div>
   <div class="row">
@@ -10,41 +10,44 @@
       <div class="row">
         <div class="col">
           <div class="card cardForm">
-            <div class="card-body">
-              <h5 class="card-title">Buscar cliente</h5>
-              <form>
-                <label for=""> Identificacion del cliente </label>
-                <input
-                  type="email"
-                  class="form-control mb-3"
-                  id="exampleFormControlInput1"
-                  placeholder="Identificacion"
-                  [(ngModel)]="identificationFind"
-                  name="identificationFind"
-                />
-                <select
-                  class="mb-3 form-select"
-                  [(ngModel)]="typeFind"
-                  name="typeFind"
-                >
-                  <option [value]="-1">Escoja una opcion</option>
-                  <option
-                    *ngFor="let type of idTypes"
-                    value="{{ type['identificationType'] }}"
-                  >
-                    {{ type.description }}
-                  </option>
-                </select>
-                <div class="col botonera">
-                  <button
-                    type="button"
-                    class="btn btn-primary btnForm"
-                    (click)="findCustomer()"
-                  >
-                    filtrar por identificacion
-                  </button>
+            <div>
+              <div class="card-body">
+                <div class="containerForm">
+                  <form>
+                    <label for=""> Identificacion del cliente </label>
+                    <input
+                      type="email"
+                      class="form-control mb-3"
+                      id="exampleFormControlInput1"
+                      placeholder="Identificacion"
+                      [(ngModel)]="identificationFind"
+                      name="identificationFind"
+                    />
+                    <select
+                      class="mb-3 form-select"
+                      [(ngModel)]="typeFind"
+                      name="typeFind"
+                    >
+                      <option [value]="-1">Escoja una opcion</option>
+                      <option
+                        *ngFor="let type of idTypes"
+                        value="{{ type['identificationType'] }}"
+                      >
+                        {{ type.description }}
+                      </option>
+                    </select>
+                    <div class="col botonera">
+                      <button
+                        type="button"
+                        class="btn btn-primary btnForm"
+                        (click)="findCustomer()"
+                      >
+                        filtrar por identificacion
+                      </button>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -52,28 +55,30 @@
       <div class="row">
         <div class="col">
           <div class="card cardForm">
-            <div class="card-body">
-              <h5 class="card-title">Buscar cliente</h5>
-              <form>
-                <label for="exampleInputEmail1" class="form-label"
-                  >Referencia del producto</label
-                >
-                <input
-                  type="text"
-                  class="form-control mb-3"
-                  [(ngModel)]="ref"
-                  name="ref"
-                />
-                <button
-                  type="button"
-                  class="btn btn-primary btnForm"
-                  (click)="findProduct()"
-                  (click)="openModal(content)"
-                  (click)="setIndex(amounts.length)"
-                >
-                  Buscar
-                </button>
-              </form>
+            <div>
+              <div class="card-body">
+                <div class="containerForm">
+                  <form>
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Referencia del producto</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control mb-3"
+                      [(ngModel)]="ref"
+                      name="ref"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-primary btnForm"
+                      (click)="findProduct(content)"
+                      (click)="setIndex(amounts.length)"
+                    >
+                      Buscar
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -85,7 +90,7 @@
           <h6>{{ client.identification }} - {{ client.businessName }}</h6>
         </div>
       </div>
-      <div class="row" *ngIf="product != undefined || client != undefined">
+      <div class="row" *ngIf="productList.length > 0">
         <div class="col">
           <div class="row tableContainer">
             <div class="col">

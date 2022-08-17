@@ -3,7 +3,12 @@
   margin: 10px;
 }
 .cardForm {
-  height: 35vh;
+  background-image: url("../../../assets/images/fondo3.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38vh;
   margin: 10px;
 }
 .tableContainer {
@@ -17,4 +22,19 @@
 tr:hover {
   background-color: rgb(211, 211, 255);
   cursor: pointer;
+}
+form {
+  width: 100%;
+}
+.containerForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  width: 30vw;
+}
+h5 {
+  text-align: center;
 }

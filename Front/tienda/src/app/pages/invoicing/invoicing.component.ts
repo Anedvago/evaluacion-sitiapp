@@ -13,50 +13,79 @@ import { ProductService } from 'src/app/services/product/product.service';
 @Component({
   selector: 'app-invoicing',
   templateUrl: './invoicing.component.html',
-  styleUrls: ['./invoicing.component.css']
+  styleUrls: ['./invoicing.component.css'],
 })
 export class InvoicingComponent implements OnInit {
-
-  constructor(private detaiInvoiceService: DetailInvoiceService, private invoiceService: InvoiceService, private productService: ProductService, private idTypesService: IdTypesService, private customerService: CustomerService, private modalService: NgbModal) { }
+  constructor(
+    private detaiInvoiceService: DetailInvoiceService,
+    private invoiceService: InvoiceService,
+    private productService: ProductService,
+    private idTypesService: IdTypesService,
+    private customerService: CustomerService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.idTypesService.listIdTypes().subscribe((data) => {
-      this.idTypes = data
-    })
+      this.idTypes = data;
+    });
   }
-  client: Client
-  idTypes: IdentificationType[] = []
-  identificationFind: string = ""
-  typeFind: number = -1
+  client: Client;
+  idTypes: IdentificationType[] = [];
+  identificationFind: string = '';
+  typeFind: number = -1;
 
-  product: Product
-  ref: number = 0
-  productList: Product[] = []
-  amounts: number[] = []
+  product: Product;
+  ref: number = 0;
+  productList: Product[] = [];
+  amounts: number[] = [];
   amount: number = 0;
   index: number = 0;
   subTotal: number = 0;
 
-  invoice: Invoice
+  invoice: Invoice;
 
   findCustomer() {
-    this.customerService.findClientByIdentificationAndType(this.identificationFind, this.typeFind).subscribe((data) => {
-      this.client = data
-      this.cleanFormSearch()
-    })
+    if (this.identificationFind != '' && this.typeFind != -1) {
+      this.customerService
+        .findClientByIdentificationAndType(
+          this.identificationFind,
+          this.typeFind
+        )
+        .subscribe((data) => {
+          if (data != undefined) {
+            this.client = data;
+            this.cleanFormSearch();
+          } else {
+            alert('El cliente no se encontro');
+          }
+        });
+    } else {
+      alert('Ingrese datos para buscar el cliente');
+    }
   }
 
-  findProduct() {
-    this.productService.findProductByRef(this.ref).subscribe((data) => {
-      this.product = data
-      this.productList.push(this.product);
-      this.amounts.push(0)
-    })
+  findProduct(content: any) {
+    if (this.ref != 0) {
+      this.productService.findProductByRef(this.ref).subscribe((data) => {
+        if (data != undefined) {
+          this.product = data;
+          this.productList.push(this.product);
+          this.amounts.push(0);
+          this.ref = 0;
+          this.openModal(content);
+        } else {
+          alert('No se encontro el producto');
+        }
+      });
+    } else {
+      alert('Ingrese la referencia del producto a buscar');
+    }
   }
   setAmount() {
-    this.amounts[this.index] = this.amount
-    this.setSubtotal()
-    this.amount = 0
+    this.amounts[this.index] = this.amount;
+    this.setSubtotal();
+    this.amount = 0;
   }
   setIndex(index: number) {
     this.index = index;
@@ -64,14 +93,14 @@ export class InvoicingComponent implements OnInit {
   setSubtotal() {
     let sum = 0;
     for (let i = 0; i < this.productList.length; i++) {
-      sum += this.productList[i].unitValue * this.amounts[i]
+      sum += this.productList[i].unitValue * this.amounts[i];
     }
     this.subTotal = sum;
   }
   removeProduct(index: number) {
     this.productList.splice(index, 1);
     this.amounts.splice(index, 1);
-    this.setSubtotal()
+    this.setSubtotal();
   }
 
   openModal(content: any) {
@@ -79,17 +108,31 @@ export class InvoicingComponent implements OnInit {
   }
 
   cleanFormSearch() {
-    this.identificationFind = ""
-    this.typeFind = -1
+    this.identificationFind = '';
+    this.typeFind = -1;
   }
 
   insertInvoice() {
-    this.invoiceService.insertInvoice(this.client).subscribe((data) => {
-      this.invoice = data;
-      for (let i = 0; i < this.productList.length; i++) {
-        this.detaiInvoiceService.insertDetailInvoice(this.invoice.consecutive, this.productList[i].id, this.amounts[i], this.productList[i].unitValue).subscribe((data) => {
-        })
-      }
-    })
+    if (this.client != undefined && this.productList.length > 0) {
+      this.invoiceService.insertInvoice(this.client).subscribe((data) => {
+        this.invoice = data;
+        for (let i = 0; i < this.productList.length; i++) {
+          this.detaiInvoiceService
+            .insertDetailInvoice(
+              this.invoice.consecutive,
+              this.productList[i].id,
+              this.amounts[i],
+              this.productList[i].unitValue
+            )
+            .subscribe((data) => {
+              this.productList = [];
+              this.amounts = [];
+              this.setSubtotal();
+            });
+        }
+      });
+    } else {
+      alert('Seleccione el cliente y los productos de la factura');
+    }
   }
 }
