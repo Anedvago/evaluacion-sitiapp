@@ -49,6 +49,36 @@
             <div class="card">
                 <div class="card-body">
                     Reporte 2
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Cliente</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of reportTwoInfo; index as i">
+                                        <th scope="row">{{ i + 1 }}</th>
+                                        <td>
+                                            {{row[0]}}
+                                        </td>
+                                        <td>
+                                            {{row[1]}}
+                                        </td>
+                                        <td>
+                                            {{row[2]}}
+                                        </td>
+                         
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
                 

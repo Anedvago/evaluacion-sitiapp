@@ -16,4 +16,10 @@ export class ReportService {
       this.clientHttp.get<any>(this.url + '', {});
     return jsonRecibido;
   }
+
+  getReportTwo() {
+    let jsonRecibido: Observable<any> =
+      this.clientHttp.get<any>(this.url + '/2', {});
+    return jsonRecibido;
+  }
 }

@@ -14,4 +14,7 @@ public class reportService {
     public ArrayList<?> obtainReportOne() {
         return (ArrayList<?>) reportRepository.obtainReportOne();
     }
+    public ArrayList<?> obtainReportTwo() {
+        return (ArrayList<?>) reportRepository.obtainReportTwo();
+    }
 }

@@ -14,8 +14,13 @@ export class ReportsComponent implements OnInit {
     this.reportService.getReportOne().subscribe((data)=>{
       this.reportOneInfo = data
     })
+    this.reportService.getReportTwo().subscribe((data)=>{
+      this.reportTwoInfo = data
+    })
   }
 
   reportOneInfo : any[] = []
+  reportTwoInfo : any[] = []
+
 
 }

@@ -18,8 +18,12 @@ public class reportController {
     reportService reportService;
 
     @GetMapping()
-    public ArrayList<?> listClients() {
+    public ArrayList<?> listReportOne() {
         return reportService.obtainReportOne();
     }
 
+    @GetMapping(path = "/2")
+    public ArrayList<?> listReportTwo() {
+        return reportService.obtainReportTwo();
+    }
 }
