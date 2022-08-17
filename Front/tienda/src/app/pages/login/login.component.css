@@ -1,0 +1,19 @@
+.containerCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+.card{
+    height: 40vh;
+    width: 30vw;
+    align-items: center;
+    background-color: antiquewhite;
+}
+form{
+    width: 100%;
+}
+.btn{
+    width: 100%;
+}

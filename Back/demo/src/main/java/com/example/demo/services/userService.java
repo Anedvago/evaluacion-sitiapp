@@ -34,6 +34,9 @@ public class userService {
     public Optional<userModel> findUserById(Long id) {
         return userRepository.findById(id);
     }
+    public Optional<userModel> login(String username, String password) {
+        return userRepository.login(username, password);
+    }
 
     public ArrayList<userModel> findUserByUsername(String username) {
         return (ArrayList<userModel>) userRepository.findByUser(username);

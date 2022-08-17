@@ -36,6 +36,11 @@ public class userController {
         return userService.findUserById(id);
     }
 
+    @GetMapping(path = "/{user}/{pass}")
+    public Optional<userModel> login(@PathVariable("user") String username,@PathVariable("pass") String password) {
+        return userService.login(username, password);
+    }
+
     @GetMapping(path = "/query")
     public ArrayList<userModel> findUserByUsername(@RequestParam("username") String username) {
         return userService.findUserByUsername(username);

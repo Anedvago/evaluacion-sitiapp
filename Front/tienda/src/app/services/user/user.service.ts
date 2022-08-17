@@ -12,6 +12,12 @@ export class UserService {
 
   private url = 'http://127.0.0.1:8080/users';
 
+  login(user: string, pass: string) {
+    let jsonRecibido: Observable<any> =
+      this.clientHttp.get<any>(this.url + '/' + user + "/"+pass, {});
+    return jsonRecibido;
+  }
+
   listUsers() {
     let jsonRecibido: Observable<any> =
       this.clientHttp.get<any>(this.url + '', {});
@@ -19,22 +25,22 @@ export class UserService {
   }
 
 
-  findUserByUsername(username:string) {
+  findUserByUsername(username: string) {
     console.log(username);
-    
+
     let jsonRecibido: Observable<any> =
       this.clientHttp.get<any>(this.url + '/query?username=' + username, {});
     return jsonRecibido;
   }
 
-  insertUser(user:User) {
+  insertUser(user: User) {
     let jsonRecibido: Observable<any> =
       this.clientHttp.post<any>(this.url + '',
         user);
     return jsonRecibido;
   }
 
-  updateUser(user:User) {
+  updateUser(user: User) {
     let jsonRecibido: Observable<any> =
       this.clientHttp.post<any>(this.url + '',
         user);
@@ -42,8 +48,8 @@ export class UserService {
   }
 
   deleteUser(id: number) {
-      let jsonRecibido: Observable<any> =
-        this.clientHttp.delete<any>(this.url + '/' + id, {});
-      return jsonRecibido
+    let jsonRecibido: Observable<any> =
+      this.clientHttp.delete<any>(this.url + '/' + id, {});
+    return jsonRecibido
   }
 }

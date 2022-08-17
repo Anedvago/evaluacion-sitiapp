@@ -11,6 +11,9 @@ import { ProductManagerComponent } from './pages/product-manager/product-manager
 import { UserManagerComponent } from './pages/user-manager/user-manager.component';
 import { InvoicingComponent } from './pages/invoicing/invoicing.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MainComponent } from './pages/main/main.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { ReportsComponent } from './pages/reports/reports.component';
     ProductManagerComponent,
     UserManagerComponent,
     InvoicingComponent,
-    ReportsComponent
+    ReportsComponent,
+    LoginComponent,
+    MainComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

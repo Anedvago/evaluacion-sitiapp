@@ -21,6 +21,7 @@ export class CustomerManagerComponent implements OnInit {
     this.idTypesService.listIdTypes().subscribe((data) => {
       this.idTypes = data
     })
+    this.profile = localStorage.getItem("profile")!;
   }
 
   clients: Client[] = []
@@ -38,6 +39,8 @@ export class CustomerManagerComponent implements OnInit {
   typeFind = -1
 
   client:Client
+
+  profile = ""
 
   cleanForm() {
     this.idType = -1
