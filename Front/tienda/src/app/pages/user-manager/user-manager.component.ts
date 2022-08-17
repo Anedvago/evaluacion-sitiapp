@@ -8,68 +8,87 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-user-manager',
   templateUrl: './user-manager.component.html',
-  styleUrls: ['./user-manager.component.css']
+  styleUrls: ['./user-manager.component.css'],
 })
 export class UserManagerComponent implements OnInit {
-
-  constructor(private profileService: ProfileService, private userService: UserService, private modalService: NgbModal) { }
+  constructor(
+    private profileService: ProfileService,
+    private userService: UserService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.userService.listUsers().subscribe((data) => {
       this.users = data;
-    })
+    });
     this.profileService.listProfiles().subscribe((data) => {
-      this.profiles = data
-    })
+      if (data.length > 0) {
+        this.profiles = data;
+      } else {
+      }
+    });
   }
 
-  users: User[] = []
-  profiles: Profile[] = []
+  users: User[] = [];
+  profiles: Profile[] = [];
 
-  typeModal: string = "create"
+  typeModal: string = 'create';
 
   id: number = 0;
-  name: string = "";
-  surname: string = "";
-  user: string = "";
-  password: string = "";
+  name: string = '';
+  surname: string = '';
+  user: string = '';
+  password: string = '';
   profile: number = 0;
 
-  usernameFind = ""
+  usernameFind = '';
 
   userCheck: User;
 
   cleanForm() {
     this.id = 0;
-    this.name = "";
-    this.surname = "";
-    this.user = "";
-    this.password = "";
+    this.name = '';
+    this.surname = '';
+    this.user = '';
+    this.password = '';
     this.profile = 0;
   }
   cleanFormSearch() {
-    this.usernameFind = "";
+    this.usernameFind = '';
   }
 
   insertUser() {
-    let profile: Profile = new Profile(this.profile, "");
-    let user: User = new User(0, this.name, this.surname, this.user, this.password, profile);
-    
+    let profile: Profile = new Profile(this.profile, '');
+    let user: User = new User(
+      0,
+      this.name,
+      this.surname,
+      this.user,
+      this.password,
+      profile
+    );
 
     this.userService.insertUser(user).subscribe((data) => {
       this.userService.listUsers().subscribe((data) => {
         this.users = data;
         this.cleanForm();
-      })
+      });
     });
   }
   updateUser() {
-    let user: User = new User(this.id, this.name, this.surname, this.user, this.password, { id: this.profile, name: "" });
+    let user: User = new User(
+      this.id,
+      this.name,
+      this.surname,
+      this.user,
+      this.password,
+      { id: this.profile, name: '' }
+    );
     this.userService.updateUser(user).subscribe((data) => {
       this.userService.listUsers().subscribe((data) => {
         this.users = data;
         this.cleanForm();
-      })
+      });
     });
   }
 
@@ -79,22 +98,21 @@ export class UserManagerComponent implements OnInit {
 
   findUser() {
     this.userService.findUserByUsername(this.usernameFind).subscribe((data) => {
-      this.users = [data[0]]
-    })
+      this.users = [data[0]];
+    });
   }
   deleteFilters() {
     this.userService.listUsers().subscribe((data) => {
       this.users = data;
       this.cleanFormSearch();
-    })
+    });
   }
-
 
   selectUser(username: string) {
     this.userService.findUserByUsername(username).subscribe((data) => {
       this.userCheck = data[0];
       this.setUser(this.userCheck);
-    })
+    });
   }
 
   setUser(user: User) {
@@ -105,12 +123,11 @@ export class UserManagerComponent implements OnInit {
     this.password = user.password;
     this.profile = user.profile.id;
     console.log(this.profile);
-
   }
 
   setTypeModal(typeModal: string) {
     this.typeModal = typeModal;
-    if (typeModal == "create") {
+    if (typeModal == 'create') {
       this.cleanForm();
     }
   }
@@ -120,9 +137,7 @@ export class UserManagerComponent implements OnInit {
       this.userService.listUsers().subscribe((data) => {
         this.users = data;
         this.cleanForm();
-      })
+      });
     });
-
   }
-
 }

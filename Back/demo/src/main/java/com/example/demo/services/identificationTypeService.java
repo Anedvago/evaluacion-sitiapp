@@ -16,5 +16,8 @@ public class identificationTypeService {
     public ArrayList<identificationTypeModel> listIdentificationTypes() {
         return (ArrayList<identificationTypeModel>) identificationTypeRepository.findAll();
     }
+    public identificationTypeModel insertIdentificationType(identificationTypeModel identificationType) {
+        return identificationTypeRepository.save(identificationType);
+    }
 
 }

@@ -16,5 +16,7 @@ public class profileService {
     public ArrayList<profileModel> listProfiles() {
         return (ArrayList<profileModel>) profileRepository.findAll();
     }
-
+    public profileModel insertProfile(profileModel profile) {
+        return profileRepository.save(profile);
+    }
 }
