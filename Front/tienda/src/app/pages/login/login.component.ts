@@ -68,23 +68,6 @@ export class LoginComponent implements OnInit {
       });
       localStorage.setItem('initial_config', 'true');
     }
-
-    /* this.profileService.listProfiles().subscribe((data) => {
-      if (!(data.length > 0)) {
-        let profile1 = new Profile(1, 'Administrador');
-        let profile2 = new Profile(1, 'Cajero');
-        this.profileService.insertProfile(profile1).subscribe(() => {
-          this.profileService.insertProfile(profile2).subscribe();
-        });
-      }
-    });
-    this.userService.listUsers().subscribe((data) => {
-      if (!(data.length > 0)) {
-        let profile = new Profile(1, 'Administrador');
-        let user = new User(1, 'super', 'user', 'admin', 'admin', profile);
-        this.userService.insertUser(user).subscribe();
-      }
-    }); */
   }
 
   username: string = '';

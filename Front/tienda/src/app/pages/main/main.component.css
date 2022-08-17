@@ -1,3 +1,54 @@
-.card{
-    height: 40vh;
+.card {
+  height: 40vh;
+  margin: 10px;
+}
+.cardExpand {
+  background-image: url("../../../assets/images/fondo1.jpg");
+  background-size: cover;
+  height: 82.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardPubli {
+  background-image: url("../../../assets/images/fondo2.jpg");
+  background-size: cover;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardInfo {
+  background-image: url("../../../assets/images/fondo3.jpg");
+  background-size: cover;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgExpand {
+  width: 100%;
+  height: 82.5vh;
+  padding: 0px;
+}
+.mensaje {
+  background-color: white;
+  width: 70%;
+  border-radius: 100px;
+  padding: 50px;
+  text-align: center;
+}
+.infopubli {
+  background-color: white;
+  width: 50%;
+  border-radius: 100px;
+  padding: 50px;
+  text-align: center;
+}
+.info {
+  background-color: white;
+  width: 50%;
+  border-radius: 100px;
+  padding: 50px;
+  text-align: center;
 }
