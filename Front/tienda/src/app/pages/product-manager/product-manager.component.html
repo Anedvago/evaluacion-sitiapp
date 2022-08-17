@@ -1,127 +1,196 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h1>Gestor De Productos</h1>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h4>Gestor De Productos</h4>
     </div>
-    <div class="row">
-        <div class="col">
-            <div class="card cardTableProducts">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Identificacion" [(ngModel)]="ref" name="ref">
-                        </div>
-                        <div class="col botonera">
-                            <button type="button" class="btn btn-primary btnForm" (click)="findProduct()">filtrar por
-                                referencia</button>
-                            <button type="button" class="btn btn-primary btnForm" (click)="deleteFilters()">quitar
-                                filtros</button>
-                            <button type="button" class="btn btn-success btnForm" (click)="openModal(content)"
-                                (click)="setTypeModal('create')">Insertar
-                                producto</button>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Ref</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Valor unitario</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">imagen</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let product of products; index as i" (click)="openModal(content)"
-                                        (click)="selectProduct(product.id)"
-                                        (click)="setTypeModal('update')">
-                                        <th scope="row">{{ i + 1 }}</th>
-                                        <td>
-                                            {{product.id}}
-                                        </td>
-                                        <td>
-                                            {{product.name}}
-                                        </td>
-                                        <td>
-                                            {{product.unitValue}}
-                                        </td>
-                                        <td>
-                                           {{product.state}}
-                                        </td>
-                                        <td>
-                                            <img src="{{ product.img }}" alt="10px" height="70px">
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card cardTableProducts">
+        <div class="card-body">
+          <div class="containerTable">
+            <div class="row">
+              <div class="col-4">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="Identificacion"
+                  [(ngModel)]="ref"
+                  name="ref"
+                />
+              </div>
+              <div class="col botonera">
+                <button
+                  type="button"
+                  class="btn btn-primary btnForm"
+                  (click)="findProduct()"
+                >
+                  filtrar por referencia
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btnForm"
+                  (click)="deleteFilters()"
+                >
+                  quitar filtros
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success btnForm"
+                  (click)="openModal(content)"
+                  (click)="setTypeModal('create')"
+                >
+                  Insertar producto
+                </button>
+              </div>
             </div>
+            <div class="row">
+              <div class="col">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Ref</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Valor unitario</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">imagen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let product of products; index as i"
+                      (click)="openModal(content)"
+                      (click)="selectProduct(product.id)"
+                      (click)="setTypeModal('update')"
+                    >
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>
+                        {{ product.id }}
+                      </td>
+                      <td>
+                        {{ product.name }}
+                      </td>
+                      <td>
+                        {{ product.unitValue }}
+                      </td>
+                      <td>
+                        {{ product.state }}
+                      </td>
+                      <td>
+                        <img src="{{ product.img }}" alt="10px" height="70px" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
 </div>
 
 <ng-template #content let-modal class="modal">
-    <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Referencia</label>
-                <input type="number" class="form-control" [(ngModel)]="id" name="id">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                <input type="text" class="form-control" [(ngModel)]="name" name="name">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Valor unitario</label>
-                <input type="text" class="form-control" [(ngModel)]="unitValue" name="unitValue">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Estado</label>
-                <select class="form-select" [(ngModel)]="state" name="state">
-                    <option value="Disponible">Disponible</option>
-                    <option value="Agotado">Agotado</option>
-                </select>
-            </div>
-            <div class="mb-3" *ngIf="typeModal == 'update' && product != undefined">
-                <label for="exampleInputEmail1" class="form-label">imagen</label>
-                <div class="row">
-                    <div class="col">
-                        <img src="{{ product.img }}" alt="100px" height="100px">
-                    </div>
-                    <div class="col-8">
-                        <input type="file" class="form-control" (change)="uploadImg($event)">
-                    </div>
-                    
-                </div>
-                
-            </div>
-            <div class="mb-3" *ngIf="typeModal == 'create'">
-                <label for="exampleInputEmail1" class="form-label">imagen</label>
-                <input type="file" class="form-control" (change)="uploadImg($event)">
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button *ngIf="typeModal == 'create'" type="button" class="btn btn-success" (click)="insertProduct()"
-            (click)="modal.close('Close click')">Insertar</button>
-        <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success" (click)="updateProduct()"
-            (click)="modal.close('Close click')">Modificar</button>
-        <button *ngIf="typeModal == 'update'" type="button" class="btn btn-success" (click)="deleteProduct()"
-            (click)="modal.close('Close click')">Eliminar</button>
-        <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Cancelar</button>
-    </div>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Referencia</label>
+        <input type="number" class="form-control" [(ngModel)]="id" name="id" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="name"
+          name="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >Valor unitario</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="unitValue"
+          name="unitValue"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Estado</label>
+        <select class="form-select" [(ngModel)]="state" name="state">
+          <option value="Disponible">Disponible</option>
+          <option value="Agotado">Agotado</option>
+        </select>
+      </div>
+      <div class="mb-3" *ngIf="typeModal == 'update' && product != undefined">
+        <label for="exampleInputEmail1" class="form-label">imagen</label>
+        <div class="row">
+          <div class="col">
+            <img src="{{ product.img }}" alt="100px" height="100px" />
+          </div>
+          <div class="col-8">
+            <input
+              type="file"
+              class="form-control"
+              (change)="uploadImg($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mb-3" *ngIf="typeModal == 'create'">
+        <label for="exampleInputEmail1" class="form-label">imagen</label>
+        <input type="file" class="form-control" (change)="uploadImg($event)" />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      *ngIf="typeModal == 'create'"
+      type="button"
+      class="btn btn-success"
+      (click)="insertProduct()"
+      (click)="modal.close('Close click')"
+    >
+      Insertar
+    </button>
+    <button
+      *ngIf="typeModal == 'update'"
+      type="button"
+      class="btn btn-success"
+      (click)="updateProduct()"
+      (click)="modal.close('Close click')"
+    >
+      Modificar
+    </button>
+    <button
+      *ngIf="typeModal == 'update'"
+      type="button"
+      class="btn btn-success"
+      (click)="deleteProduct()"
+      (click)="modal.close('Close click')"
+    >
+      Eliminar
+    </button>
+    <button
+      type="button"
+      class="btn btn-dark"
+      (click)="modal.close('Close click')"
+    >
+      Cancelar
+    </button>
+  </div>
 </ng-template>

@@ -1,88 +1,80 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h1>
-                Reportes
-            </h1>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h4>Reportes</h4>
     </div>
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    Reporte 1 <br>Productos más vendidos por cada mes.
-                    <div class="row">
-                        <div class="col">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Fecha</th>
-                                        <th scope="col">Producto</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let row of reportOneInfo; index as i">
-                                        <th scope="row">{{ i + 1 }}</th>
-                                        <td>
-                                            {{row[0]}}
-                                        </td>
-                                        <td>
-                                            {{row[1]}}
-                                        </td>
-                                        <td>
-                                            {{row[2]}}
-                                        </td>
-                         
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="row content">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          Reporte 1 <br />Productos más vendidos por cada mes.
+          <div class="row">
+            <div class="col">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of reportOneInfo; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                      {{ row[0] }}
+                    </td>
+                    <td>
+                      {{ row[1] }}
+                    </td>
+                    <td>
+                      {{ row[2] }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-                
+          </div>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    Reporte 2 <br>clientes que menos compran por año.
-                    <div class="row">
-                        <div class="col">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Fecha</th>
-                                        <th scope="col">Cliente</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let row of reportTwoInfo; index as i">
-                                        <th scope="row">{{ i + 1 }}</th>
-                                        <td>
-                                            {{row[0]}}
-                                        </td>
-                                        <td>
-                                            {{row[1]}}
-                                        </td>
-                                        <td>
-                                            {{row[2]}}
-                                        </td>
-                         
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                
-        </div>
+      </div>
     </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          Reporte 2 <br />clientes que menos compran por año.
+          <div class="row">
+            <div class="col">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of reportTwoInfo; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                      {{ row[0] }}
+                    </td>
+                    <td>
+                      {{ row[1] }}
+                    </td>
+                    <td>
+                      {{ row[2] }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
